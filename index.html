@@ -206,16 +206,9 @@ body {
 <body>
 
 <div class="header">
-  <div class="header-top">
-    <div class="header-logo" style="display:flex;align-items:center;gap:0;flex:1;">
-      <svg width="100%" height="52" viewBox="0 0 390 76" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="barH1" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#a89fff" />
-            <stop offset="100%" style="stop-color:#7c6fff" />
-          </linearGradient>
-        </defs>
-        <!-- Icon -->
+  <div class="header-top" style="display:flex;align-items:center;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+      <svg width="150" height="54" viewBox="0 0 200 76" xmlns="http://www.w3.org/2000/svg">
         <rect x="0" y="4" width="56" height="56" rx="13" fill="#7c6fff"/>
         <rect x="10" y="17" width="36" height="24" rx="5" fill="#5a52d5"/>
         <rect x="10" y="17" width="36" height="9" rx="5" fill="#6e63e8"/>
@@ -226,14 +219,11 @@ body {
         <rect x="20" y="25" width="5" height="13" rx="2" fill="#c4beff"/>
         <polyline points="15.5,33 22.5,27 29,30" fill="none" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="29" cy="30" r="2.5" fill="#00e676"/>
-        <!-- Wordmark -->
         <text x="68" y="33" fill="#f0f0ff" font-size="26" font-weight="700" font-family="-apple-system,'SF Pro Display','Segoe UI',sans-serif" letter-spacing="-0.5">Minhas</text>
         <text x="68" y="58" fill="#7c6fff" font-size="26" font-weight="700" font-family="-apple-system,'SF Pro Display','Segoe UI',sans-serif" letter-spacing="-0.5">Despesas</text>
-        <!-- Divider -->
-        <line x1="210" y1="14" x2="210" y2="62" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-        <!-- Month label (updated by JS via foreignObject trick — use a text placeholder) -->
-        <text id="monthLabel" x="222" y="50" fill="#f0f0ff" font-size="30" font-weight="700" font-family="-apple-system,'SF Pro Display','Segoe UI',sans-serif" letter-spacing="-0.5">Carregando...</text>
       </svg>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,0.15);flex-shrink:0;"></div>
+      <div id="monthLabel" style="font-size:20px;font-weight:700;color:var(--text);white-space:nowrap;letter-spacing:-0.3px;">Carregando...</div>
     </div>
     <div class="month-nav">
       <button class="month-btn" id="navPrevBtn" onclick="navPrev()">&#8249;</button>
@@ -541,6 +531,7 @@ const CATEGORIES = {
   ]
 };
 const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const MONTHS_SHORT = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
 let selectedCat = 'food', filterCat = 'all', filterDay = null, installmentActive = false, fixedActive = false;
 let selectedCard = '';
 // Sempre inicia no mês atual de hoje — nunca fica preso em mês anterior
@@ -821,7 +812,7 @@ function toast(msg) {
   setTimeout(() => el.classList.remove('show'), 2200);
 }
 function render() {
-  document.getElementById('monthLabel').textContent = MONTHS[currentMonth] + ' ' + currentYear;
+  document.getElementById('monthLabel').textContent = MONTHS_SHORT[currentMonth] + ' ' + currentYear;
   document.getElementById('balanceLabel').textContent = 'Saldo do mês';
 
   const txs = getMonthTxs();
