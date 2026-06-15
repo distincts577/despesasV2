@@ -51,7 +51,7 @@ body {
   z-index: 100;
 }
 .header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
-.header-logo { display:flex; align-items:center; gap:10px; }
+.header-logo { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
 .logo-icon { width:36px; height:36px; background:var(--pr); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 4px 16px var(--pr-glow); }
 .header-title { font-size:17px; font-weight:700; letter-spacing:-0.3px; }
 .header-sub { font-size:12px; color:var(--text2); margin-top:1px; }
@@ -207,12 +207,33 @@ body {
 
 <div class="header">
   <div class="header-top">
-    <div class="header-logo">
-      <div class="logo-icon">💰</div>
-      <div>
-        <div class="header-title">Minhas Despesas</div>
-        <div class="header-sub" id="monthLabel">Carregando...</div>
-      </div>
+    <div class="header-logo" style="display:flex;align-items:center;gap:0;flex:1;">
+      <svg width="100%" height="52" viewBox="0 0 390 76" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="barH1" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#a89fff" />
+            <stop offset="100%" style="stop-color:#7c6fff" />
+          </linearGradient>
+        </defs>
+        <!-- Icon -->
+        <rect x="0" y="4" width="56" height="56" rx="13" fill="#7c6fff"/>
+        <rect x="10" y="17" width="36" height="24" rx="5" fill="#5a52d5"/>
+        <rect x="10" y="17" width="36" height="9" rx="5" fill="#6e63e8"/>
+        <rect x="10" y="22" width="36" height="5" fill="#6e63e8"/>
+        <rect x="33" y="24" width="13" height="11" rx="4" fill="#4040a0"/>
+        <circle cx="39.5" cy="29.5" r="4" fill="#a89fff"/>
+        <rect x="13" y="29" width="5" height="9" rx="2" fill="#c4beff"/>
+        <rect x="20" y="25" width="5" height="13" rx="2" fill="#c4beff"/>
+        <polyline points="15.5,33 22.5,27 29,30" fill="none" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="29" cy="30" r="2.5" fill="#00e676"/>
+        <!-- Wordmark -->
+        <text x="68" y="33" fill="#f0f0ff" font-size="26" font-weight="700" font-family="-apple-system,'SF Pro Display','Segoe UI',sans-serif" letter-spacing="-0.5">Minhas</text>
+        <text x="68" y="58" fill="#7c6fff" font-size="26" font-weight="700" font-family="-apple-system,'SF Pro Display','Segoe UI',sans-serif" letter-spacing="-0.5">Despesas</text>
+        <!-- Divider -->
+        <line x1="210" y1="14" x2="210" y2="62" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Month label (updated by JS via foreignObject trick — use a text placeholder) -->
+        <text id="monthLabel" x="222" y="50" fill="#f0f0ff" font-size="30" font-weight="700" font-family="-apple-system,'SF Pro Display','Segoe UI',sans-serif" letter-spacing="-0.5">Carregando...</text>
+      </svg>
     </div>
     <div class="month-nav">
       <button class="month-btn" id="navPrevBtn" onclick="navPrev()">&#8249;</button>
