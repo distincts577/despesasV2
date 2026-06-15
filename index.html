@@ -1124,8 +1124,6 @@ function renderParcelas() {
     '</div>';
   }).join('');
 }
-renderCatGrid();
-render();
 
 // ---- Renda ----
 function loadRenda() {
@@ -1135,27 +1133,25 @@ function loadRenda() {
   calcRenda();
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  loadRenda();
+  render();
+});
+
 function calcRenda() {
   const salario = parseFloat(document.getElementById('rendaSalario').value) || 0;
   const bolsa   = parseFloat(document.getElementById('rendaBolsa').value) || 0;
   const aluguel = parseFloat(document.getElementById('rendaAluguel').value) || 0;
   const total = salario + bolsa + aluguel;
-
   document.getElementById('rendaTotalDisplay').textContent = fmt(total);
-
   const items = [
     { emoji:'💼', name:'Salário', val: salario },
     { emoji:'👨‍👩‍👧', name:'Bolsa Família', val: bolsa },
     { emoji:'🏠', name:'Aluguel Recebido', val: aluguel },
   ].filter(i => i.val > 0);
-
   document.getElementById('rendaBreakdown').innerHTML = items.map(i =>
-    '<div class="renda-breakdown-item">' +
-    '<span class="name">' + i.emoji + ' ' + i.name + '</span>' +
-    '<span class="val">' + fmt(i.val) + '</span></div>'
-  ).join('') + (total > 0 ? '<div style="height:1px;background:rgba(255,255,255,0.08);margin:4px 0"></div>' +
-    '<div class="renda-breakdown-item"><span class="name" style="font-weight:700;color:var(--text)">Total</span>' +
-    '<span class="val" style="color:var(--green)">' + fmt(total) + '</span></div>' : '');
+    '<div class="renda-breakdown-item"><span class="name">' + i.emoji + ' ' + i.name + '</span><span class="val">' + fmt(i.val) + '</span></div>'
+  ).join('') + (total > 0 ? '<div style="height:1px;background:rgba(255,255,255,0.08);margin:4px 0"></div><div class="renda-breakdown-item"><span class="name" style="font-weight:700;color:var(--text)">Total</span><span class="val" style="color:var(--green)">' + fmt(total) + '</span></div>' : '');
 }
 
 function salvarRenda() {
@@ -1169,8 +1165,6 @@ function salvarRenda() {
   render();
   toast('✅ Renda salva! Ela será aplicada automaticamente todos os meses.');
 }
-
-loadRenda();
 </script>
 <div class="overlay" id="resetOverlay" onclick="closeResetModal(event)">
   <div class="modal">
